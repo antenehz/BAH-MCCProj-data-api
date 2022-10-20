@@ -1,5 +1,7 @@
+
+
 -- ----------------------------------------------
--- Create Tables
+-- DDL Statements for tables
 -- ----------------------------------------------
 
 CREATE TABLE "CUSTOMERS" ("ID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "CUSTOMER_NAME" VARCHAR(255), "PASSWORD" VARCHAR(255),EMAIL VARCHAR(255));
@@ -7,7 +9,7 @@ CREATE TABLE "EVENTS" ("ID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START
 CREATE TABLE "REGISTRATIONS" ("ID" INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1), "EVENT_ID" INTEGER NOT NULL, "CUSTOMER_ID" INTEGER NOT NULL, "REGISTRATION_DATE" TIMESTAMP, NOTES VARCHAR(255));
 
 -- ----------------------------------------------
--- Set Keys for tables
+-- DDL Statements for keys
 -- ----------------------------------------------
 
 -- primary/unique
