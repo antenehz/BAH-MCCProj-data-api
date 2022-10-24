@@ -1,6 +1,6 @@
 node {
     stage('Checkout') {
-        git url: 'https://github.com/antenehz/BAH-MCCProj-data-api.git'
+        git branch: 'main', url: 'https://github.com/antenehz/BAH-MCCProj-data-api.git'
     }
     
     stage('Pull Latest Changes') {
