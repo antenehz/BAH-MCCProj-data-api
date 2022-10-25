@@ -7,7 +7,7 @@ node {
         'git pull'
     }
     
-    stage('Gradle Build') {
+    stage('Gradle') {
         'gradle clean build bootJar'
     }
 }
