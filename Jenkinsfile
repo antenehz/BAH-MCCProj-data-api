@@ -8,7 +8,7 @@ node {
     }
     
     stage('Gradle') {
-        'gradle clean build bootJar'
+        sh 'gradle clean build bootJar'
     }
     
     stage('User Acceptance Test') {
