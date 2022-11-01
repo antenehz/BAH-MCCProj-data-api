@@ -1,5 +1,8 @@
 node {
     stage('Checkout Data-Api') {
+	sh 'docker stop data-api'
+	sh 'kubectl delete service data-api'
+	sh 'kubectl delete deployment data-api'
         git branch: 'main', url: 'https://github.com/antenehz/BAH-MCCProj-data-api.git'
     }
     
@@ -21,7 +24,7 @@ node {
     }
     
     stage('Run Docker Instance') {
-        sh 'docker stop data-api'
+       
         sh 'docker run -d --rm --name data-api -p 8080:8080 data-api:v1.0'
     }
     
@@ -32,8 +35,6 @@ node {
 	
 	  if(response=="Yes") {
 	    stage('Deploy to Kubenetes cluster - DataApi') {
-	      sh 'kubectl delete service data-api'
-	      sh 'kubectl delete deployment data-api'
 	      sh 'kubectl create deployment data-api --image=data-api:v1.0'
 	      sh 'kubectl expose deployment data-api --type=LoadBalancer --port=8080'
 	    }
