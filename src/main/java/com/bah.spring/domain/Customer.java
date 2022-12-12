@@ -1,18 +1,18 @@
 package com.bah.spring.domain;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="CUSTOMERS")
+@Document(collection="CUSTOMERS")
 public class Customer {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	long id;
+	String id;
 	
 	@Column(name="CUSTOMER_NAME")
 	String name;
@@ -21,11 +21,11 @@ public class Customer {
 	
 	String email;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -52,5 +52,9 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	@Override
+	public String toString(){
+		return "Customer [id:" + id + ", name:" + name + ", pass:" + password + ", email:" + email + "]";
+	}
 }

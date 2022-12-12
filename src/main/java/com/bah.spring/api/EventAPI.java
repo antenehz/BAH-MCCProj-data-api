@@ -32,14 +32,14 @@ public class EventAPI {
 	}
 
 	@GetMapping("/{eventId}")
-	public Optional<Event> getEventById(@PathVariable("eventId") long id) {
+	public Optional<Event> getEventById(@PathVariable("eventId") String id) {
 		// return repo.findOne(id);
 		return repo.findById(id);
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> addEvent(@RequestBody Event newEvent, UriComponentsBuilder uri) {
-		if (newEvent.getId() != 0 || newEvent.getCode() == null || newEvent.getTitle() == null || newEvent.getDescription() == null) {
+		if (!newEvent.getId().equals(0) || newEvent.getCode() == null || newEvent.getTitle() == null || newEvent.getDescription() == null) {
 			// Reject we'll assign the event id
 			return ResponseEntity.badRequest().build();
 		}
@@ -55,7 +55,7 @@ public class EventAPI {
 			@RequestBody Event newEvent,
 			@PathVariable("eventId") long eventId) 
 	{
-		if (newEvent.getId() != eventId || newEvent.getCode() == null || newEvent.getTitle() == null || newEvent.getDescription() == null) {
+		if (!newEvent.getId().equals(eventId) || newEvent.getCode() == null || newEvent.getTitle() == null || newEvent.getDescription() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		newEvent = repo.save(newEvent);
@@ -63,7 +63,7 @@ public class EventAPI {
 	}	
 	
 	@DeleteMapping("/{eventId}")
-	public ResponseEntity<?> deleteEventById(@PathVariable("eventId") long id) {
+	public ResponseEntity<?> deleteEventById(@PathVariable("eventId") String id) {
 		// repo.delete(id);
 		repo.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

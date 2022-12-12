@@ -1,5 +1,6 @@
 package com.bah.spring.domain;
 
+import org.bson.types.ObjectId;
 import org.json.JSONObject;
 
 
@@ -9,9 +10,7 @@ public class CustomerFactory {
 
         // parsing file "JSONExample.json"
         JSONObject jobj = new org.json.JSONObject(json_string);
-
-        // getting firstName and lastName
-        int id = (int) jobj.get("id");
+        String id = (String) jobj.get("id");
         String name = (String) jobj.get("name");
         String email = (String) jobj.get("email");
         String password = (String) jobj.get("password");

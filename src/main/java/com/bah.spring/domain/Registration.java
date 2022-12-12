@@ -1,5 +1,8 @@
 package com.bah.spring.domain;
 
+import org.bson.types.ObjectId;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,13 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Table(name="REGISTRATIONS")
+@Document(collection="REGISTRATIONS")
 public class Registration {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	long id;
+	String id;
 	
 	@Column(name="EVENT_ID")
 	String event_id;
@@ -27,11 +29,11 @@ public class Registration {
 	
 	String notes;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -66,7 +68,10 @@ public class Registration {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
-	
+
+	@Override
+	public String toString(){
+		return "Registration [id:" + id + ", customer_id:" + customer_id + ", registration_date:" + registration_date + ", notes:" + notes + "]";
+	}
 	
 }

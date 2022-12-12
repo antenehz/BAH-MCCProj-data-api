@@ -34,14 +34,14 @@ public class CustomerAPI {
 	}
 
 	@GetMapping("/{customerId}")
-	public Optional<Customer> getCustomerById(@PathVariable("customerId") long id) {
+	public Optional<Customer> getCustomerById(@PathVariable("customerId") String id) {
 		//return repo.findOne(id);
 		return repo.findById(id);
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> addCustomer(@RequestBody Customer newCustomer, UriComponentsBuilder uri) {
-		if (newCustomer.getId() != 0 || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+		if (newCustomer.getId() != "0" || newCustomer.getName() == null || newCustomer.getEmail() == null) {
 			// Reject we'll assign the customer id
 			return ResponseEntity.badRequest().build();
 		}
@@ -90,7 +90,7 @@ public class CustomerAPI {
 			@RequestBody Customer newCustomer,
 			@PathVariable("customerId") long customerId) 
 	{
-		if (newCustomer.getId() != customerId || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+		if (newCustomer.getId() != String.valueOf(customerId) || newCustomer.getName() == null || newCustomer.getEmail() == null) {
 			return ResponseEntity.badRequest().build();
 		}
 		newCustomer = repo.save(newCustomer);
@@ -98,7 +98,7 @@ public class CustomerAPI {
 	}	
 	
 	@DeleteMapping("/{customerId}")
-	public ResponseEntity<?> deleteCustomerById(@PathVariable("customerId") long id) {
+	public ResponseEntity<?> deleteCustomerById(@PathVariable("customerId") String id) {
 		// repo.delete(id);
 		repo.deleteById(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
