@@ -41,7 +41,8 @@ public class CustomerAPI {
 	
 	@PostMapping
 	public ResponseEntity<?> addCustomer(@RequestBody Customer newCustomer, UriComponentsBuilder uri) {
-		if (newCustomer.getId() != "0" || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+		// check if id is null
+		if (newCustomer.getName() == null || newCustomer.getEmail() == null) {
 			// Reject we'll assign the customer id
 			return ResponseEntity.badRequest().build();
 		}
@@ -90,10 +91,10 @@ public class CustomerAPI {
 			@RequestBody Customer newCustomer,
 			@PathVariable("customerId") long customerId) 
 	{
-		if (newCustomer.getId() != String.valueOf(customerId) || newCustomer.getName() == null || newCustomer.getEmail() == null) {
+		if (newCustomer.getId().toString() != String.valueOf(customerId) || newCustomer.getName() == null || newCustomer.getEmail() == null) {
 			return ResponseEntity.badRequest().build();
 		}
-		newCustomer = repo.save(newCustomer);
+		repo.save(newCustomer);
 		return ResponseEntity.ok().build();
 	}	
 	

@@ -10,7 +10,7 @@ public class CustomerFactory {
 
         // parsing file "JSONExample.json"
         JSONObject jobj = new org.json.JSONObject(json_string);
-        String id = (String) jobj.get("id");
+        ObjectId id = (ObjectId) jobj.get("id");
         String name = (String) jobj.get("name");
         String email = (String) jobj.get("email");
         String password = (String) jobj.get("password");
